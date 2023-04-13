@@ -1,28 +1,37 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.keymap.set('i', "jk", "<Esc>", { desc = 'escape to normal mode' })
-vim.keymap.set('n', "<leader>e", vim.cmd.Ex, { desc = 'Open netrw' })
--- vim.keymap.set('n', "<C-h>", vim.cmd.Ex, { desc = 'Open netrw' })
+-- Quick way to get back to normal mode TODO Better-Escape
+vim.keymap.set('i', "jk", "<Esc>", { desc = 'Escape to normal mode' })
+
+-- File Explorer
+vim.keymap.set('n', "<leader>e", vim.cmd.Ex, { desc = 'Open netrw (default File Explorer)' })
+
+-- Quick Split
+vim.keymap.set('n', '\\', vim.cmd.sp, {desc = 'Split screen'})
+vim.keymap.set('n', '|', vim.cmd.vs, {desc = 'Split screen vertically'})
+
+--Quick Close
+vim.keymap.set('n', '<leader>q',vim.cmd.q, {desc = 'Quit'})
 
 function Smart_splits_keymaps()
 	local splits = require('smart-splits')
-	vim.keymap.set('n', '<A-h>', splits.resize_left)
-	vim.keymap.set('n', '<A-j>', splits.resize_down)
-	vim.keymap.set('n', '<A-k>', splits.resize_up)
-	vim.keymap.set('n', '<A-l>', splits.resize_right)
+	vim.keymap.set('n', '<A-S-h>', splits.resize_left,{desc = 'Resize current window left'})
+	vim.keymap.set('n', '<A-S-j>', splits.resize_down,{desc = 'Resize current window down'})
+	vim.keymap.set('n', '<A-S-k>', splits.resize_up,{desc = 'Resize current window up'})
+	vim.keymap.set('n', '<A-S-l>', splits.resize_right,{desc = 'Resize current window right'})
 	-- moving between splits
-	vim.keymap.set('n', '<C-h>', splits.move_cursor_left)
-	vim.keymap.set('n', '<C-j>', splits.move_cursor_down)
-	vim.keymap.set('n', '<C-k>', splits.move_cursor_up)
-	vim.keymap.set('n', '<C-l>', splits.move_cursor_right)
+	vim.keymap.set('n', '<C-h>', splits.move_cursor_left,{desc = 'Move focus to left window'})
+	vim.keymap.set('n', '<C-j>', splits.move_cursor_down,{desc = 'Move focus to down window'})
+	vim.keymap.set('n', '<C-k>', splits.move_cursor_up,{desc = 'Move focus to up window'})
+	vim.keymap.set('n', '<C-l>', splits.move_cursor_right,{desc = 'Move focus to right window'})
 	-- swapping buffers between windows
-	vim.keymap.set('n', '<C-A-h>', splits.swap_buf_left)
-	vim.keymap.set('n', '<C-A-j>', splits.swap_buf_down)
-	vim.keymap.set('n', '<C-A-k>', splits.swap_buf_up)
-	vim.keymap.set('n', '<C-A-l>', splits.swap_buf_right)
+	vim.keymap.set('n', '<S-a>', splits.swap_buf_left,{desc = 'Swap current window with left one'})
+	vim.keymap.set('n', '<S-w>', splits.swap_buf_down,{desc = 'Swap current window with down one'})
+	vim.keymap.set('n', '<S-s>', splits.swap_buf_up,{desc = 'Swap current window with up one'})
+	vim.keymap.set('n', '<S-d>', splits.swap_buf_right,{desc = 'Swap current window with right one'})
 end
-
+-- TODO
 function Telescope_keymaps()
 	local builtin = require('telescope.builtin')
 	vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'find files' })
