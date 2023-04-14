@@ -1,6 +1,5 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-
 -- Quick way to get back to normal mode TODO Better-Escape
 vim.keymap.set('i', "jk", "<Esc>", { desc = 'Escape to normal mode' })
 
@@ -8,37 +7,86 @@ vim.keymap.set('i', "jk", "<Esc>", { desc = 'Escape to normal mode' })
 vim.keymap.set('n', "<leader>e", vim.cmd.Ex, { desc = 'Open netrw (default File Explorer)' })
 
 -- Quick Split
-vim.keymap.set('n', '\\', vim.cmd.sp, {desc = 'Split screen'})
-vim.keymap.set('n', '|', vim.cmd.vs, {desc = 'Split screen vertically'})
+vim.keymap.set('n', '\\', vim.cmd.sp, { desc = 'Split screen' })
+vim.keymap.set('n', '|', vim.cmd.vs, { desc = 'Split screen vertically' })
 
 --Quick Close
-vim.keymap.set('n', '<leader>q',vim.cmd.q, {desc = 'Quit'})
+vim.keymap.set('n', '<leader>q', vim.cmd.q, { desc = 'Quit' })
+vim.keymap.set('n', '<leader>Q', '<cmd>q!<CR>', { desc = 'Quit' })
+
+-- Move lines around
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = 'move selected lines down' })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'move selected lines up' })
+
+-- Append next line without moving cursor
+vim.keymap.set('n', '<leader>j', 'mzJ`z', { desc = 'append next line' })
+
+-- Move half page around keeping cursor in the middle
+vim.keymap.set('n', 'J', '<C-d>zz', { desc = 'move cursor half page down' })
+vim.keymap.set('n', 'K', '<C-u>zz', { desc = 'move cursor half page up' })
+
+-- Next search term kepping cursor in the middle
+vim.keymap.set('n', 'n', 'nzzzv', { desc = 'next search term' })
+vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'next search term' })
+
+-- Paste without losing yanked text
+vim.keymap.set('x', 'p', '\"_dP', { desc = 'a better paste' })
+
+-- remap normal p to <leader>p
+vim.keymap.set('x', '<leader>p', 'p', { desc = 'normal paste' })
+
+-- system clipboard
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '\"+y', { desc = 'copy to system clipboard' })
+vim.keymap.set('n', '<leader>Y', '\"+Y', { desc = 'copy to system clipboard the text at right of cursor' })
+
+-- Navigate buffers
+vim.keymap.set("n", "<S-h>", vim.cmd.BufferLineCyclePrev, {desc = 'go to previous buffer'})
+vim.keymap.set("n", "<S-l>", vim.cmd.BufferLineCycleNext, {desc = 'go to next buffer'})
+
+-- Move buffers
+vim.keymap.set("n", "<leader>bh", vim.cmd.BufferLineMovePrev, {desc = 'go to previous buffer'})
+vim.keymap.set("n", "<leader>bl", vim.cmd.BufferLineMoveNext, {desc = 'go to next buffer'})
+
+
+-- close buffer
+vim.keymap.set('n','<leader>c', vim.cmd.bdelete, {desc = 'delete buffer'})
+
+-- Stay in indent mode
+vim.keymap.set("v", "<", "<gv", {desc = 'indent left'})
+vim.keymap.set("v", ">", ">gv", {desc = 'indent right'})
+
+--disable search highlight
+vim.keymap.set("n", "<leader>n", vim.cmd.nohlsearch, {desc = 'disable search highlight'})
+
+-- don't know why this exists
+vim.keymap.set('n', 'Q', '<nop>')
 
 function Smart_splits_keymaps()
 	local splits = require('smart-splits')
-	vim.keymap.set('n', '<A-S-h>', splits.resize_left,{desc = 'Resize current window left'})
-	vim.keymap.set('n', '<A-S-j>', splits.resize_down,{desc = 'Resize current window down'})
-	vim.keymap.set('n', '<A-S-k>', splits.resize_up,{desc = 'Resize current window up'})
-	vim.keymap.set('n', '<A-S-l>', splits.resize_right,{desc = 'Resize current window right'})
+	-- resizing splits
+	vim.keymap.set('n', '<A-h>', splits.resize_left, { desc = 'Resize current window left' })
+	vim.keymap.set('n', '<A-j>', splits.resize_down, { desc = 'Resize current window down' })
+	vim.keymap.set('n', '<A-k>', splits.resize_up, { desc = 'Resize current window up' })
+	vim.keymap.set('n', '<A-l>', splits.resize_right, { desc = 'Resize current window right' })
 	-- moving between splits
-	vim.keymap.set('n', '<C-h>', splits.move_cursor_left,{desc = 'Move focus to left window'})
-	vim.keymap.set('n', '<C-j>', splits.move_cursor_down,{desc = 'Move focus to down window'})
-	vim.keymap.set('n', '<C-k>', splits.move_cursor_up,{desc = 'Move focus to up window'})
-	vim.keymap.set('n', '<C-l>', splits.move_cursor_right,{desc = 'Move focus to right window'})
+	vim.keymap.set('n', '<C-h>', splits.move_cursor_left, { desc = 'Move focus to left window' })
+	vim.keymap.set('n', '<C-j>', splits.move_cursor_down, { desc = 'Move focus to down window' })
+	vim.keymap.set('n', '<C-k>', splits.move_cursor_up, { desc = 'Move focus to up window' })
+	vim.keymap.set('n', '<C-l>', splits.move_cursor_right, { desc = 'Move focus to right window' })
 	-- swapping buffers between windows
-	vim.keymap.set('n', '<S-a>', splits.swap_buf_left,{desc = 'Swap current window with left one'})
-	vim.keymap.set('n', '<S-w>', splits.swap_buf_down,{desc = 'Swap current window with down one'})
-	vim.keymap.set('n', '<S-s>', splits.swap_buf_up,{desc = 'Swap current window with up one'})
-	vim.keymap.set('n', '<S-d>', splits.swap_buf_right,{desc = 'Swap current window with right one'})
+	vim.keymap.set('n', '<C-A-h>', splits.swap_buf_left, { desc = 'Swap current window with left one' })
+	vim.keymap.set('n', '<C-A-k>', splits.swap_buf_down, { desc = 'Swap current window with down one' })
+	vim.keymap.set('n', '<C-A-j>', splits.swap_buf_up, { desc = 'Swap current window with up one' })
+	vim.keymap.set('n', '<C-A-l>', splits.swap_buf_right, { desc = 'Swap current window with right one' })
 end
--- TODO
+
 function Telescope_keymaps()
 	local builtin = require('telescope.builtin')
-	vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'find files' })
-	vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = 'find git files' })
-	vim.keymap.set('n', '<leader>fG', builtin.live_grep, { desc = 'wtf?' })
-	vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'search on buffers' })
-	vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'wtf?' })
+	vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[f]ind [f]iles' })
+	vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = '[f]ind [g]it files' })
+	--vim.keymap.set('n', '<leader>fG', builtin.live_grep, { desc = 'wtf?' })
+	vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[f]ind on [b]uffers' })
+	vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[f]ind in [h]elp manuals' })
 end
 
 function Lsp_keymaps()
@@ -51,8 +99,10 @@ function Lsp_keymaps()
 	vim.keymap.set('v', '<leader>la', vim.lsp.buf.code_action, { desc = '[L]sp Code [A]ction' })
 	vim.keymap.set('n', '<leader>ld', vim.diagnostic.open_float, { desc = '[L]sp Hover [D]iagnostics' })
 
+	-- not working, don't know why TODO
+	--vim.keymap.set('n','gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+
 	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = '[G]oto [D]efinition' })
-	--  vim.keymap.set('n','gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 	vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, { desc = '[G]oto [I]mplementation' })
 	vim.keymap.set('n', 'gT', vim.lsp.buf.type_definition, { desc = 'Type [D]efinition' })
 	vim.keymap.set('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols,
@@ -61,8 +111,8 @@ function Lsp_keymaps()
 		{ desc = '[W]orkspace [S]ymbols' })
 
 	-- See `:help K` for why this keymap
-	vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover Documentation' })
-	vim.keymap.set('n', '<leader>k', vim.lsp.buf.signature_help, { desc = 'Signature Documentation' })
+	vim.keymap.set('n', '<leader>k', vim.lsp.buf.hover, { desc = 'Hover Documentation' })
+	vim.keymap.set('n', '<leader>K', vim.lsp.buf.signature_help, { desc = 'Signature Documentation' })
 
 	-- Lesser used LSP functionality
 	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = '[G]oto [D]eclaration' })
@@ -76,10 +126,8 @@ end
 function Cmp_keymaps(cmp)
 	local luasnip = require('luasnip')
 	return cmp.mapping.preset.insert({
-		["<Up>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
-		["<Down>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
-		["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
-		["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
+		["<Up>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
+		["<Down>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
 		["<C-k>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
 		["<C-j>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
 		["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
@@ -110,4 +158,40 @@ function Cmp_keymaps(cmp)
 			end
 		end, { "i", "s" }),
 	})
+end
+
+function ToggleTerm_keymaps()
+	vim.keymap.set('n', '<leader>tF', '<cmd>ToggleTerm direction=tab<CR>', {desc = 'open floating terminal'})
+	vim.keymap.set('n', '<leader>tf', '<cmd>ToggleTerm direction=float<CR>', {desc = 'open floating terminal'})
+	vim.keymap.set('n', '<leader>t\\', '<cmd>ToggleTerm direction=horizontal size=10<CR>', {desc = 'open floating terminal'})
+	vim.keymap.set('n', '<leader>t|', '<cmd>ToggleTerm direction=vertical size=50<CR>', {desc = 'open floating terminal'})
+
+	vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], {desc = 'bind terminal escape'})
+	vim.keymap.set('t', 'jk', [[<C-\><C-n>]], {desc = 'quick terminal escape'})
+	vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], {desc = 'goto left window'})
+	vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], {desc = 'goto down window'})
+	vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], {desc = 'goto up window'})
+	vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], {desc = 'goto right window'})
+	vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], {desc = 'default navigation prefix to escape'})
+end
+
+function Comment_keymaps()
+        local api = require('Comment.api')
+        local esc = vim.api.nvim_replace_termcodes(
+            '<ESC>', true, false, true
+        )
+
+	vim.keymap.set('n', '<leader>/', api.toggle.linewise.current, {desc = 'comment line'})
+
+        vim.keymap.set('x', '<leader>/', function()
+            vim.api.nvim_feedkeys(esc, 'nx', false)
+            api.toggle.blockwise(vim.fn.visualmode())
+        end)
+end
+
+function Undotree_keymaps()
+	vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, {desc = 'UndoTree Toggle'})
+end
+function Fugitive_keymaps()
+	vim.keymap.set('n', '<leader>G', vim.cmd.Git, {desc = 'Open Git Status'})
 end

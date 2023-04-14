@@ -1,5 +1,10 @@
 return {
 	{
+		"lewis6991/impatient.nvim",
+		config = function() require("impatient") end,
+		priority = 1000,
+	},
+	{
 		"folke/which-key.nvim",
 		config = function()
 			vim.o.timeout = true
@@ -11,4 +16,12 @@ return {
 			})
 		end,
 	},
+	{
+		"mbbill/undotree",
+		config = Undotree_keymaps(),
+	},
+	{
+		"tpope/vim-fugitive",
+		config = Fugitive_keymaps()
+	}
 }
