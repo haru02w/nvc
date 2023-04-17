@@ -9,11 +9,7 @@ return {
 		config = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300
-			require("which-key").setup({
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-			})
+			require("which-key").setup()
 		end,
 	},
 	{
@@ -23,5 +19,26 @@ return {
 	{
 		"tpope/vim-fugitive",
 		config = Fugitive_keymaps()
-	}
+	},
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		opts = {
+			indent_blankline_char = '|',
+			show_current_context = true,
+			show_current_context_start = true,
+		},
+	},
+	{
+		"max397574/better-escape.nvim",
+		opts = {
+			clear_empty_lines = true,
+			keys = function()
+				return vim.api.nvim_win_get_cursor(0)[2] > 1 and '<esc>l' or '<esc>'
+			end,
+		}
+	},
+	{
+		"moll/vim-bbye",
+		config = Bbye_keymaps()
+	},
 }

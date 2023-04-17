@@ -1,7 +1,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
--- Quick way to get back to normal mode TODO Better-Escape
-vim.keymap.set('i', "jk", "<Esc>", { desc = 'Escape to normal mode' })
+-- Quick way to get back to normal mode: commented because Better-Escape is installed
+-- vim.keymap.set('i', "jk", "<Esc>", { desc = 'Escape to normal mode' })
 
 -- File Explorer
 vim.keymap.set('n', "<leader>e", vim.cmd.Ex, { desc = 'Open netrw (default File Explorer)' })
@@ -40,23 +40,23 @@ vim.keymap.set({ 'n', 'v' }, '<leader>y', '\"+y', { desc = 'copy to system clipb
 vim.keymap.set('n', '<leader>Y', '\"+Y', { desc = 'copy to system clipboard the text at right of cursor' })
 
 -- Navigate buffers
-vim.keymap.set("n", "<S-h>", vim.cmd.BufferLineCyclePrev, {desc = 'go to previous buffer'})
-vim.keymap.set("n", "<S-l>", vim.cmd.BufferLineCycleNext, {desc = 'go to next buffer'})
+vim.keymap.set("n", "<S-h>", vim.cmd.BufferLineCyclePrev, { desc = 'go to previous buffer' })
+vim.keymap.set("n", "<S-l>", vim.cmd.BufferLineCycleNext, { desc = 'go to next buffer' })
 
 -- Move buffers
-vim.keymap.set("n", "<leader>bh", vim.cmd.BufferLineMovePrev, {desc = 'go to previous buffer'})
-vim.keymap.set("n", "<leader>bl", vim.cmd.BufferLineMoveNext, {desc = 'go to next buffer'})
+vim.keymap.set("n", "<leader>bh", vim.cmd.BufferLineMovePrev, { desc = 'go to previous buffer' })
+vim.keymap.set("n", "<leader>bl", vim.cmd.BufferLineMoveNext, { desc = 'go to next buffer' })
 
 
--- close buffer
-vim.keymap.set('n','<leader>c', vim.cmd.bdelete, {desc = 'delete buffer'})
+-- close buffer: commented because vim-bbye is installed
+-- vim.keymap.set('n', '<leader>c', vim.cmd.bdelete, { desc = 'delete buffer' })
 
 -- Stay in indent mode
-vim.keymap.set("v", "<", "<gv", {desc = 'indent left'})
-vim.keymap.set("v", ">", ">gv", {desc = 'indent right'})
+vim.keymap.set("v", "<", "<gv", { desc = 'indent left' })
+vim.keymap.set("v", ">", ">gv", { desc = 'indent right' })
 
 --disable search highlight
-vim.keymap.set("n", "<leader>n", vim.cmd.nohlsearch, {desc = 'disable search highlight'})
+vim.keymap.set("n", "<leader>n", vim.cmd.nohlsearch, { desc = 'disable search highlight' })
 
 -- don't know why this exists
 vim.keymap.set('n', 'Q', '<nop>')
@@ -64,29 +64,29 @@ vim.keymap.set('n', 'Q', '<nop>')
 function Smart_splits_keymaps()
 	local splits = require('smart-splits')
 	-- resizing splits
-	vim.keymap.set('n', '<A-h>', splits.resize_left, { desc = 'Resize current window left' })
-	vim.keymap.set('n', '<A-j>', splits.resize_down, { desc = 'Resize current window down' })
-	vim.keymap.set('n', '<A-k>', splits.resize_up, { desc = 'Resize current window up' })
-	vim.keymap.set('n', '<A-l>', splits.resize_right, { desc = 'Resize current window right' })
+	vim.keymap.set('n', '<C-A-h>', splits.resize_left, { desc = 'Resize current window left' })
+	vim.keymap.set('n', '<C-A-j>', splits.resize_down, { desc = 'Resize current window down' })
+	vim.keymap.set('n', '<C-A-k>', splits.resize_up, { desc = 'Resize current window up' })
+	vim.keymap.set('n', '<C-A-l>', splits.resize_right, { desc = 'Resize current window right' })
 	-- moving between splits
 	vim.keymap.set('n', '<C-h>', splits.move_cursor_left, { desc = 'Move focus to left window' })
 	vim.keymap.set('n', '<C-j>', splits.move_cursor_down, { desc = 'Move focus to down window' })
 	vim.keymap.set('n', '<C-k>', splits.move_cursor_up, { desc = 'Move focus to up window' })
 	vim.keymap.set('n', '<C-l>', splits.move_cursor_right, { desc = 'Move focus to right window' })
 	-- swapping buffers between windows
-	vim.keymap.set('n', '<C-A-h>', splits.swap_buf_left, { desc = 'Swap current window with left one' })
-	vim.keymap.set('n', '<C-A-k>', splits.swap_buf_down, { desc = 'Swap current window with down one' })
-	vim.keymap.set('n', '<C-A-j>', splits.swap_buf_up, { desc = 'Swap current window with up one' })
-	vim.keymap.set('n', '<C-A-l>', splits.swap_buf_right, { desc = 'Swap current window with right one' })
+	vim.keymap.set('n', '<A-H>', splits.swap_buf_left, { desc = 'Swap current window with left one' })
+	vim.keymap.set('n', '<A-K>', splits.swap_buf_down, { desc = 'Swap current window with down one' })
+	vim.keymap.set('n', '<A-J>', splits.swap_buf_up, { desc = 'Swap current window with up one' })
+	vim.keymap.set('n', '<A-L>', splits.swap_buf_right, { desc = 'Swap current window with right one' })
 end
 
 function Telescope_keymaps()
-	local builtin = require('telescope.builtin')
-	vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[f]ind [f]iles' })
-	vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = '[f]ind [g]it files' })
-	--vim.keymap.set('n', '<leader>fG', builtin.live_grep, { desc = 'wtf?' })
-	vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[f]ind on [b]uffers' })
-	vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[f]ind in [h]elp manuals' })
+	local tcbuiltin = require('telescope.builtin')
+	vim.keymap.set('n', '<leader>ff', tcbuiltin.find_files, { desc = '[f]ind [f]iles' })
+	vim.keymap.set('n', '<leader>fg', tcbuiltin.git_files, { desc = '[f]ind [g]it files' })
+	--vim.keymap.set('n', '<leader>fG', tc.builtin.live_grep, { desc = 'wtf?' })
+	vim.keymap.set('n', '<leader>fb', tcbuiltin.buffers, { desc = '[f]ind on [b]uffers' })
+	vim.keymap.set('n', '<leader>fh', tcbuiltin.help_tags, { desc = '[f]ind in [h]elp manuals' })
 end
 
 function Lsp_keymaps()
@@ -161,37 +161,50 @@ function Cmp_keymaps(cmp)
 end
 
 function ToggleTerm_keymaps()
-	vim.keymap.set('n', '<leader>tF', '<cmd>ToggleTerm direction=tab<CR>', {desc = 'open floating terminal'})
-	vim.keymap.set('n', '<leader>tf', '<cmd>ToggleTerm direction=float<CR>', {desc = 'open floating terminal'})
-	vim.keymap.set('n', '<leader>t\\', '<cmd>ToggleTerm direction=horizontal size=10<CR>', {desc = 'open floating terminal'})
-	vim.keymap.set('n', '<leader>t|', '<cmd>ToggleTerm direction=vertical size=50<CR>', {desc = 'open floating terminal'})
+	vim.keymap.set('n', '<leader>tF', '<cmd>ToggleTerm direction=tab<CR>', { desc = 'open floating terminal' })
+	vim.keymap.set('n', '<leader>tf', '<cmd>ToggleTerm direction=float<CR>', { desc = 'open floating terminal' })
+	vim.keymap.set('n', '<leader>t\\', '<cmd>ToggleTerm direction=horizontal size=10<CR>',
+		{ desc = 'open floating terminal' })
+	vim.keymap.set('n', '<leader>t|', '<cmd>ToggleTerm direction=vertical size=50<CR>',
+		{ desc = 'open floating terminal' })
 
-	vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], {desc = 'bind terminal escape'})
-	vim.keymap.set('t', 'jk', [[<C-\><C-n>]], {desc = 'quick terminal escape'})
-	vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], {desc = 'goto left window'})
-	vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], {desc = 'goto down window'})
-	vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], {desc = 'goto up window'})
-	vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], {desc = 'goto right window'})
-	vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], {desc = 'default navigation prefix to escape'})
+	vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], { desc = 'bind terminal escape' })
+	vim.keymap.set('t', 'jk', [[<C-\><C-n>]], { desc = 'quick terminal escape' })
+	vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], { desc = 'goto left window' })
+	vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], { desc = 'goto down window' })
+	vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], { desc = 'goto up window' })
+	vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], { desc = 'goto right window' })
+	vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], { desc = 'default navigation prefix to escape' })
 end
 
 function Comment_keymaps()
-        local api = require('Comment.api')
-        local esc = vim.api.nvim_replace_termcodes(
-            '<ESC>', true, false, true
-        )
+	local api = require('Comment.api')
+	local esc = vim.api.nvim_replace_termcodes(
+		'<ESC>', true, false, true
+	)
 
-	vim.keymap.set('n', '<leader>/', api.toggle.linewise.current, {desc = 'comment line'})
+	vim.keymap.set('n', '<leader>/', api.toggle.linewise.current, { desc = 'linewise comment a line' })
+	vim.keymap.set('n', '<leader>?', api.toggle.blockwise.current, { desc = 'blockwise comment a line' })
 
-        vim.keymap.set('x', '<leader>/', function()
-            vim.api.nvim_feedkeys(esc, 'nx', false)
-            api.toggle.blockwise(vim.fn.visualmode())
-        end)
+	vim.keymap.set('x', '<leader>/', function()
+		vim.api.nvim_feedkeys(esc, 'nx', false)
+		api.toggle.blockwise(vim.fn.visualmode())
+	end, { desc = 'blockwise comment selected text' })
+
+	vim.keymap.set('x', '<leader>?', function()
+		vim.api.nvim_feedkeys(esc, 'nx', false)
+		api.toggle.linewise(vim.fn.visualmode())
+	end, { desc = 'linewise comment selected text' })
 end
 
 function Undotree_keymaps()
-	vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, {desc = 'UndoTree Toggle'})
+	vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = 'UndoTree Toggle' })
 end
+
 function Fugitive_keymaps()
-	vim.keymap.set('n', '<leader>G', vim.cmd.Git, {desc = 'Open Git Status'})
+	vim.keymap.set('n', '<leader>G', vim.cmd.Git, { desc = 'Open Git Status' })
+end
+
+function Bbye_keymaps()
+	vim.keymap.set('n', '<leader>c', vim.cmd.Bdelete, { desc = 'close buffer' })
 end
