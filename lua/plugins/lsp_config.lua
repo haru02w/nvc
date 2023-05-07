@@ -7,7 +7,7 @@ return { {
 		{
 			'williamboman/mason-lspconfig.nvim',
 			opts = { ensure_installed = { "lua_ls" } },
-			config = function(_, opts)
+			config = function(opts)
 				require("mason-lspconfig").setup(opts)
 
 				require("mason-lspconfig").setup_handlers { function(server_name)

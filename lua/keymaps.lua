@@ -1,18 +1,14 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
--- Quick way to get back to normal mode: commented because Better-Escape is installed
--- vim.keymap.set('i', "jk", "<Esc>", { desc = 'Escape to normal mode' })
+
+vim.keymap.set('i', '<C-BS>', '<C-w>', { desc = 'delete previous word' })
 
 -- File Explorer
 vim.keymap.set('n', "<leader>e", vim.cmd.Ex, { desc = 'Open netrw (default File Explorer)' })
 
 -- Quick Split
-vim.keymap.set('n', '\\', vim.cmd.sp, { desc = 'Split screen' })
-vim.keymap.set('n', '|', vim.cmd.vs, { desc = 'Split screen vertically' })
-
---Quick Close
-vim.keymap.set('n', '<leader>q', vim.cmd.q, { desc = 'Quit' })
-vim.keymap.set('n', '<leader>Q', '<cmd>q!<CR>', { desc = 'Quit' })
+vim.keymap.set('n', '<leader>\\', vim.cmd.sp, { desc = 'Split screen' })
+vim.keymap.set('n', '<leader>|', vim.cmd.vs, { desc = 'Split screen vertically' })
 
 -- Move lines around
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = 'move selected lines down' })
@@ -47,7 +43,6 @@ vim.keymap.set("n", "<S-l>", vim.cmd.BufferLineCycleNext, { desc = 'go to next b
 vim.keymap.set("n", "<leader>bh", vim.cmd.BufferLineMovePrev, { desc = 'go to previous buffer' })
 vim.keymap.set("n", "<leader>bl", vim.cmd.BufferLineMoveNext, { desc = 'go to next buffer' })
 
-
 -- close buffer: commented because vim-bbye is installed
 -- vim.keymap.set('n', '<leader>c', vim.cmd.bdelete, { desc = 'delete buffer' })
 
@@ -80,7 +75,7 @@ function Smart_splits_keymaps()
 	vim.keymap.set('n', '<A-L>', splits.swap_buf_right, { desc = 'Swap current window with right one' })
 end
 
-function Telescope_keymaps()
+function Telescope_keymaps() --TODO implement more fuzzyfinding
 	local tcbuiltin = require('telescope.builtin')
 	vim.keymap.set('n', '<leader>ff', tcbuiltin.find_files, { desc = '[f]ind [f]iles' })
 	vim.keymap.set('n', '<leader>fg', tcbuiltin.git_files, { desc = '[f]ind [g]it files' })
@@ -160,13 +155,13 @@ function Cmp_keymaps(cmp)
 	})
 end
 
-function ToggleTerm_keymaps()
-	vim.keymap.set('n', '<leader>tF', '<cmd>ToggleTerm direction=tab<CR>', { desc = 'open floating terminal' })
+function ToggleTerm_keymaps() --TODO disable most things except floating terminals (use tmux)
+	vim.keymap.set('n', '<leader>tF', '<cmd>ToggleTerm direction=tab<CR>', { desc = 'open tab terminal' })
 	vim.keymap.set('n', '<leader>tf', '<cmd>ToggleTerm direction=float<CR>', { desc = 'open floating terminal' })
 	vim.keymap.set('n', '<leader>t\\', '<cmd>ToggleTerm direction=horizontal size=10<CR>',
-		{ desc = 'open floating terminal' })
+		{ desc = 'open horizontal terminal' })
 	vim.keymap.set('n', '<leader>t|', '<cmd>ToggleTerm direction=vertical size=50<CR>',
-		{ desc = 'open floating terminal' })
+		{ desc = 'open vertical terminal' })
 
 	vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], { desc = 'bind terminal escape' })
 	vim.keymap.set('t', 'jk', [[<C-\><C-n>]], { desc = 'quick terminal escape' })
@@ -186,10 +181,11 @@ function Comment_keymaps()
 	vim.keymap.set('n', '<leader>/', api.toggle.linewise.current, { desc = 'linewise comment a line' })
 	vim.keymap.set('n', '<leader>?', api.toggle.blockwise.current, { desc = 'blockwise comment a line' })
 
-	vim.keymap.set('x', '<leader>/', function()
-		vim.api.nvim_feedkeys(esc, 'nx', false)
-		api.toggle.blockwise(vim.fn.visualmode())
-	end, { desc = 'blockwise comment selected text' })
+	vim.keymap.set('x', '<leader>/',
+		function()
+			vim.api.nvim_feedkeys(esc, 'nx', false)
+			api.toggle.blockwise(vim.fn.visualmode())
+		end, { desc = 'blockwise comment selected text' })
 
 	vim.keymap.set('x', '<leader>?', function()
 		vim.api.nvim_feedkeys(esc, 'nx', false)

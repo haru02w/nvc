@@ -1,5 +1,8 @@
 local o = vim.opt
 
+o.cmdheight = 0 -- disable reserved line for commands
+o.autochdir = true -- update current directory based on the opened file
+
 o.autoread = true -- read changes to file automatically
 o.laststatus = 2 -- statusline: 0-never, 1-more than two windows, 2-always, 3-only the last
 
@@ -11,9 +14,9 @@ o.relativenumber = true --enable relative numbers
 
 -- fix indent
 o.expandtab = false -- no spaces
-o.tabstop = 8 -- tab size 
-o.softtabstop = 8 --tab size 2
-o.shiftwidth = 8 --tab size for autoindent
+o.tabstop = 4 -- tab size 
+o.softtabstop = 4 --tab size 2
+o.shiftwidth = 4 --tab size for autoindent
 o.shiftround = true -- round tabs to shiftwidth
 o.smartindent = true
 

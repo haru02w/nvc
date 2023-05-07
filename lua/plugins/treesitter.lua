@@ -9,7 +9,7 @@ return {
 		highlight = {enable = true},
 		additional_vim_regex_highlighting = false,
 	},
-	config = function(_,opts)
+	config = function(opts)
 		require'nvim-treesitter.configs'.setup(opts)
 	end,
 }
