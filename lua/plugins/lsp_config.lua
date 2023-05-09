@@ -1,5 +1,5 @@
 return { {
-          -- LSP Configuration & Plugins
+	-- LSP Configuration & Plugins
 	'neovim/nvim-lspconfig',
 	dependencies = {
 		-- Automatically install LSPs to stdpath for neovim
@@ -10,17 +10,33 @@ return { {
 			config = function(opts)
 				require("mason-lspconfig").setup(opts)
 
-				require("mason-lspconfig").setup_handlers { function(server_name)
-					require('lspconfig')[server_name].setup {
-						on_attach = Lsp_keymaps(),
-						capabilities = require('cmp_nvim_lsp').default_capabilities(),
-						settings = {
-							Lua = {
-								diagnostics = { globals = { 'vim' } }
+				require("mason-lspconfig").setup_handlers {
+					function(server_name)
+						require('lspconfig')[server_name].setup {
+							on_attach = Lsp_keymaps(),
+							capabilities = require('cmp_nvim_lsp').default_capabilities(),
+						}
+					end,
+					["lua_ls"] = function()
+						require('lspconfig').lua_ls.setup {
+							on_attach = Lsp_keymaps(),
+							capabilities = require('cmp_nvim_lsp').default_capabilities(),
+							settings = {
+								Lua = {
+									diagnostics = { globals = { 'vim' } }
+								}
 							}
 						}
-					}
-				end }
+					end,
+					["jdtls"] = function()
+						require('lspconfig').jdtls.setup {
+							on_attach = Lsp_keymaps(),
+							capabilities = require('cmp_nvim_lsp').default_capabilities(),
+							root_dir = require('lspconfig').util.root_pattern("pom.xml", "build.gradle", ".git") or
+							vim.fn.getcwd()
+						}
+					end,
+				}
 			end,
 		},
 
