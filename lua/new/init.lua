@@ -1,6 +1,7 @@
-require("keymaps")
-require("options")
 vim.loader.enable()
+require("new.keymaps")
+require("new.options")
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -14,11 +15,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins", {
+local opts = {
   install = {
     -- install missing plugins on startup. This doesn't increase startup time.
     missing = true,
-    -- try to load one of these colorschemes when starting an installation during startup
     colorscheme = { "onedark" },
   },
-})
+}
+
+require("lazy").setup("new.plugins", opts)

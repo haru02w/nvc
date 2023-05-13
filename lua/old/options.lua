@@ -1,6 +1,6 @@
 local o = vim.opt
 
-o.cmdheight = 0 -- disable reserved line for commands
+o.cmdheight = 1 -- disable reserved line for commands
 o.autochdir = true -- update current directory based on the opened file
 
 o.autoread = true -- read changes to file automatically

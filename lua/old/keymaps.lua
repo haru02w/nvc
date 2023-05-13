@@ -17,9 +17,14 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'move selected lines up' }
 -- Append next line without moving cursor
 vim.keymap.set('n', '<leader>j', 'mzJ`z', { desc = 'append next line' })
 
--- Move half page around keeping cursor in the middle
+-- Move half page around keeping cursor in the middle 
+-- TODO remove it
 vim.keymap.set('n', 'J', '<C-d>zz', { desc = 'move cursor half page down' })
 vim.keymap.set('n', 'K', '<C-u>zz', { desc = 'move cursor half page up' })
+
+-- Move half page around keeping cursor in the middle 
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'move cursor half page down' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'move cursor half page up' })
 
 -- Next search term kepping cursor in the middle
 vim.keymap.set('n', 'n', 'nzzzv', { desc = 'next search term' })
@@ -82,6 +87,14 @@ function Telescope_keymaps() --TODO implement more fuzzyfinding
 	--vim.keymap.set('n', '<leader>fG', tc.builtin.live_grep, { desc = 'wtf?' })
 	vim.keymap.set('n', '<leader>fb', tcbuiltin.buffers, { desc = '[f]ind on [b]uffers' })
 	vim.keymap.set('n', '<leader>fh', tcbuiltin.help_tags, { desc = '[f]ind in [h]elp manuals' })
+
+vim.keymap.set('n', '<leader>/', function()
+  -- You can pass additional configuration to telescope to change theme, layout, etc.
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
+end, { desc = '[/] Fuzzily search in current buffer' })
 end
 
 function Lsp_keymaps()
