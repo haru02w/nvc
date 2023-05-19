@@ -1,6 +1,6 @@
 vim.loader.enable()
-require("new.keymaps")
-require("new.options")
+require("nvc.keymaps")
+require("nvc.options")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -23,4 +23,4 @@ local opts = {
   },
 }
 
-require("lazy").setup("new.plugins", opts)
+require("lazy").setup("nvc.plugins", opts)

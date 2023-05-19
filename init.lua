@@ -1,1 +1,1 @@
-require("new")
+require("nvc")

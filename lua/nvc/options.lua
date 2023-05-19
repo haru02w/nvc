@@ -1,34 +1,33 @@
 local o = vim.opt
 -- netrw relativenumbers
-vim.g.netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+vim.g.netrw_bufsettings = "noma nomod nu nobl nowrap ro"
 vim.g.netrw_liststyle = 3
 -- change root dir with netrw
 vim.g.netrw_keepdir = 0
 
 -- Enable format-on-save from LSP
-vim.api.nvim_create_autocmd('BufWritePre', {
+--[[ vim.api.nvim_create_autocmd('BufWritePre', {
   callback = function()
     vim.lsp.buf.format()
   end
-})
-
+}) ]]
 -- Highlight on yank
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank()
   end,
   group = highlight_group,
-  pattern = '*',
+  pattern = "*",
 })
 
 -- Set completeopt to have a better completion experience (TODO why?)
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = "menuone,noselect"
 
 -- Enable break indent (TODO why this is useful?)
 vim.o.breakindent = true
 
-o.mouse = 'a'   -- Enable mouse
+o.mouse = "a"   -- Enable mouse
 
 o.cmdheight = 1 -- disable reserved line for commands
 -- o.autochdir = false -- update current directory based on the opened file
@@ -43,7 +42,7 @@ o.number = true         --enable numbers
 o.relativenumber = true --enable relative numbers
 
 -- Keep signcolumn on by default
-o.signcolumn = 'yes'
+o.signcolumn = "yes"
 -- fix indent
 o.expandtab = false -- no spaces
 o.tabstop = 4       -- tab size
