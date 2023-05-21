@@ -4,10 +4,11 @@ return { -- TODO do it properly
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
-			{ "lukas-reineke/cmp-rg",lazy = true },
+			{ "lukas-reineke/cmp-rg", lazy = true },
 			{ "hrsh7th/cmp-nvim-lsp", lazy = true },
-			{ "hrsh7th/cmp-buffer", lazy = true },
-			{ "hrsh7th/cmp-path", lazy = true },
+			{ "hrsh7th/cmp-buffer",   lazy = true },
+			{ "hrsh7th/cmp-path",     lazy = true },
+			{ "hrsh7th/cmp-cmdline",  lazy = true },
 			{
 				"L3MON4D3/LuaSnip",
 				lazy = true,
@@ -38,6 +39,25 @@ return { -- TODO do it properly
 			-- If you want insert `(` after select function or method item
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+			-- `/` cmdline setup.
+			cmp.setup.cmdline("/", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = {
+					{ name = "buffer" },
+				},
+			})
+
+			-- `:` cmdline setup.
+			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({
+					{ name = "path" },
+				}, {
+					{ name = "cmdline" },
+				}),
+			})
+
 			return {
 				history = true,
 				updateevents = "TextChanged,TextChangedI",
@@ -100,11 +120,11 @@ return { -- TODO do it properly
 					end, { "i", "s" }),
 				}),
 				sources = {
-					{ name = "luasnip", priority = 1000 },
+					{ name = "luasnip",  priority = 1000 },
 					{ name = "nvim_lsp", priority = 750 },
-					{ name = "buffer", priority = 500 },
-					{ name = "path", priority = 250 },
-					{ name = "rg", priority = 200 },
+					{ name = "buffer",   priority = 500 },
+					{ name = "path",     priority = 250 },
+					{ name = "rg",       priority = 200 },
 				},
 				formatting = {
 					format = lspkind.cmp_format({

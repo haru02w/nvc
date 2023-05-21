@@ -103,6 +103,12 @@ return {
 				hover = " ",
 				kind = {},
 			},
+			code_action = {
+				max_width = 0.7,
+				max_height = 0.6,
+				max_show_width = 0.9,
+				max_show_height = 0.6,
+			}
 		},
 		config = function(_, opts)
 			require("lspsaga").setup(opts)

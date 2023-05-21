@@ -35,7 +35,7 @@ return {
 	},
 	{
 		"mbbill/undotree",
-		cmd = "UndoTree",
+		cmd = "UndotreeToggle",
 		config = require("nvc.keymaps").undotree(),
 	},
 	{

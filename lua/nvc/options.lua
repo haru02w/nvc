@@ -22,18 +22,18 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Set completeopt to have a better completion experience (TODO why?)
-vim.o.completeopt = "menuone,noselect"
+o.completeopt = "menuone,noselect"
 
 -- Enable break indent (TODO why this is useful?)
-vim.o.breakindent = true
+o.breakindent = true
 
 o.mouse = "a"   -- Enable mouse
 
-o.cmdheight = 1 -- disable reserved line for commands
+o.cmdheight = 0 -- disable reserved line for commands
 -- o.autochdir = false -- update current directory based on the opened file
 
 o.autoread = true       -- read changes to file automatically
-o.laststatus = 2        -- statusline: 0-never, 1-more than two windows, 2-always, 3-only the last
+o.laststatus = 3        -- statusline: 0-never, 1-more than two windows, 2-always, 3-only the last
 
 o.ignorecase = true     -- disable case sensitiviness on search
 o.smartcase = true      -- enable back when a capital letter is written
