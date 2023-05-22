@@ -73,7 +73,7 @@ return {
 			},
 			messages = {
 				view = "mini", -- default view for messages
-				view_error = "messages", -- view for errors
+				view_error = "popup", -- view for errors
 				view_warn = "mini", -- view for warnings
 			},
 			popupmenu = { backend = "cmp" },

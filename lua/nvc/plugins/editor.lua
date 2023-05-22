@@ -37,7 +37,20 @@ return {
 		"windwp/nvim-ts-autotag",
 		event = { "BufReadPost", "BufNewFile" },
 	},
-	{ -- TODO configure it properly
+	{
+		"stevearc/oil.nvim",
+		keys = require("nvc.keymaps").oil(),
+		opts = {
+			keymaps = {
+				["<Esc>"] = "actions.close",
+				["q"] = "actions.close",
+			},
+		},
+		-- Optional dependencies
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
+	{
+		-- TODO configure it properly
 		"lewis6991/gitsigns.nvim",
 		opts = {},
 	},

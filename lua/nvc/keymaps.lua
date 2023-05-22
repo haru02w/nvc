@@ -197,4 +197,10 @@ function M.dap()
 	keymap("n","<leader>du",require("dapui").toggle, {desc = 'toggle dap ui'})
 end
 
+function M.oil()
+	return {
+		{ "-", vim.cmd.Oil, desc = "Toggle zenmode" },
+	}
+end
+
 return M
