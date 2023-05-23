@@ -1,1 +1,1 @@
-require("nvc")
+require('nvc')

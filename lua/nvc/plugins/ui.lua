@@ -2,34 +2,34 @@ return {
 	{
 		-- Default UI ================
 		-- Theme inspired by Atom
-		"navarasu/onedark.nvim",
+		'navarasu/onedark.nvim',
 		lazy = false,
 		priority = 1000,
 		opts = {
-			style = "deep",
+			style = 'deep',
 			highlights = {
-				Search = { bg = "#8B8000" },
+				Search = { bg = '#8B8000' },
 			},
 		},
 		config = function(_, opts)
-			require("onedark").setup(opts)
-			require("onedark").load()
+			require('onedark').setup(opts)
+			require('onedark').load()
 		end,
 	},
 	{
-		"nvim-lualine/lualine.nvim",
+		'nvim-lualine/lualine.nvim',
 		lazy = false,
 		dependencies = {
-			"nvim-tree/nvim-web-devicons",
+			'nvim-tree/nvim-web-devicons',
 		},
 		config = function()
 			--[[ local function clock()
 				return "󰅐 " .. os.date("%H:%M:%S")
 			end ]]
-			require("lualine").setup({
+			require('lualine').setup({
 				sections = {
 					lualine_c = {
-						{ "filename", path = 4 },
+						{ 'filename', path = 4 },
 					},
 					--[[ lualine_y = {
 						{ clock, color = { fg = "#d78700" } },
@@ -39,10 +39,10 @@ return {
 		end,
 	}, -- Default UI ================
 	{
-		"folke/noice.nvim",
-		event = "VeryLazy",
+		'folke/noice.nvim',
+		event = 'VeryLazy',
 		dependencies = {
-			"MunifTanjim/nui.nvim",
+			'MunifTanjim/nui.nvim',
 		},
 		opts = {
 			views = {
@@ -57,13 +57,13 @@ return {
 					reverse = false,
 					position = {
 						row = 1,
-						col = "100%",
+						col = '100%',
 					},
 				},
 			},
 			cmdline = {
 				enabled = true, -- enables the Noice cmdline UI
-				view = "cmdline", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
+				view = 'cmdline', -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
 				opts = {}, -- global options for the cmdline. See section on views
 				format = {
 					filter = false,
@@ -72,11 +72,11 @@ return {
 				},
 			},
 			messages = {
-				view = "mini", -- default view for messages
-				view_error = "popup", -- view for errors
-				view_warn = "mini", -- view for warnings
+				view = 'mini', -- default view for messages
+				view_error = 'popup', -- view for errors
+				view_warn = 'mini', -- view for warnings
 			},
-			popupmenu = { backend = "cmp" },
+			popupmenu = { backend = 'cmp' },
 			lsp = {
 				progress = {
 					enabled = false,
@@ -88,7 +88,7 @@ return {
 		},
 	},
 	{
-		"MunifTanjim/nui.nvim",
+		'MunifTanjim/nui.nvim',
 		lazy = true,
 	},
 	--[[ {
@@ -101,22 +101,22 @@ return {
 	}, ]]
 	{
 		-- Lua
-		"folke/zen-mode.nvim",
+		'folke/zen-mode.nvim',
 		opts = {
 			window = {
 				width = 85,
 			},
 		},
-		keys = require("nvc.keymaps").zenmode(),
+		keys = require('nvc.keymaps').zenmode(),
 	},
 	{
-		"nvim-tree/nvim-web-devicons",
+		'nvim-tree/nvim-web-devicons',
 		lazy = true,
 		opts = {},
 	},
 	{
-		"stevearc/dressing.nvim",
-		event = "VeryLazy",
+		'stevearc/dressing.nvim',
+		event = 'VeryLazy',
 		opts = {},
 	},
 }

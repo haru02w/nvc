@@ -1,6 +1,6 @@
 local o = vim.opt
 -- netrw relativenumbers
-vim.g.netrw_bufsettings = "noma nomod nu nobl nowrap ro"
+vim.g.netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 vim.g.netrw_liststyle = 3
 -- change root dir with netrw
 vim.g.netrw_keepdir = 0
@@ -12,22 +12,22 @@ vim.g.netrw_keepdir = 0
   end
 }) ]]
 -- Highlight on yank
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     vim.highlight.on_yank()
   end,
   group = highlight_group,
-  pattern = "*",
+  pattern = '*',
 })
 
 -- Set completeopt to have a better completion experience (TODO why?)
-o.completeopt = "menuone,noselect"
+o.completeopt = 'menuone,noselect'
 
 -- Enable break indent (TODO why this is useful?)
 o.breakindent = true
 
-o.mouse = "a"   -- Enable mouse
+o.mouse = 'a'   -- Enable mouse
 
 o.cmdheight = 0 -- disable reserved line for commands
 -- o.autochdir = false -- update current directory based on the opened file
@@ -42,7 +42,7 @@ o.number = true         --enable numbers
 o.relativenumber = true --enable relative numbers
 
 -- Keep signcolumn on by default
-o.signcolumn = "yes"
+o.signcolumn = 'yes'
 -- fix indent
 o.expandtab = false -- no spaces
 o.tabstop = 4       -- tab size
@@ -55,7 +55,7 @@ o.wrap = false --don't wrap lines
 
 o.swapfile = false
 o.backup = false
-o.undodir = os.getenv("HOME") .. "/.local/share/nvim/undodir"
+o.undodir = os.getenv('HOME') .. '/.local/share/nvim/undodir'
 o.undofile = true
 
 o.hlsearch = true      --keep highlights enabled (see keymaps to fast disable)
@@ -70,5 +70,5 @@ o.updatetime = 50
 o.timeout = true
 o.timeoutlen = 300
 
-o.colorcolumn = "80" -- good code belongs is in less than 80 lines
+o.colorcolumn = '80' -- good code belongs is in less than 80 lines
 o.cursorline = true  -- to easily track the cursor
