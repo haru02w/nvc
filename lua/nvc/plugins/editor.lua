@@ -17,7 +17,7 @@ return {
 		},
 	},
 	{
-		-- TODO put keybinds to it
+		-- TODO: put keybinds to it
 		-- "gc" to comment visual regions/lines
 		'numToStr/Comment.nvim',
 		event = { 'BufReadPost', 'BufNewFile' },
@@ -51,6 +51,7 @@ return {
 			keymaps = {
 				['<Esc>'] = 'actions.close',
 				['q'] = 'actions.close',
+				['<CR>'] = 'actions.select',
 			},
 		},
 		-- Optional dependencies

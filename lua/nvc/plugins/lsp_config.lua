@@ -86,9 +86,10 @@ return {
 	{
 		--TODO configure it
 		-- LSP UI
-		'glepnir/lspsaga.nvim',
+		'haru02w/lspsaga.nvim',
 		event = 'LspAttach',
 		opts = {
+			auto_resize = true,
 			ui = {
 				-- This option only works in Neovim 0.9
 				title = true,
