@@ -16,7 +16,9 @@ return {
 				-- Additional lua configuration, makes nvim stuff amazing!
 				'folke/neodev.nvim',
 				lazy = true,
-				opts = {},
+				opts = {
+					library = { plugins = { 'nvim-dap-ui' }, types = true },
+				},
 			},
 		},
 	},

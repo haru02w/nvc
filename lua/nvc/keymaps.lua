@@ -59,6 +59,13 @@ keymap('n', '<leader>n', vim.cmd.nohlsearch, { desc = 'disable search highlight'
 -- don't know why this exists
 keymap('n', 'Q', '<nop>')
 
+keymap('t', '<esc>', [[<C-\><C-n>]],{desc = 'get out of terminal mode'})
+keymap('t', '<C-h>', [[<Cmd>wincmd h<CR>]],{desc = 'move left window'})
+keymap('t', '<C-j>', [[<Cmd>wincmd j<CR>]],{desc = 'move down window'})
+keymap('t', '<C-k>', [[<Cmd>wincmd k<CR>]],{desc = 'move up window'})
+keymap('t', '<C-l>', [[<Cmd>wincmd l<CR>]],{desc = 'move right window'})
+keymap('t', '<C-w>', [[<C-\><C-n><C-w>]],{desc = 'control windows'})
+
 function M.lspsaga()
 	-- Call hierarchy
 	keymap('n', '<Leader>li', '<cmd>Lspsaga incoming_calls<CR>')
@@ -194,7 +201,20 @@ function M.zenmode()
 end
 
 function M.dap()
-	keymap('n', '<leader>du', require('dapui').toggle, { desc = 'toggle dap ui' })
+	keymap('n', '<F3>', require('dapui').toggle, { desc = 'toggle dap ui' })
+
+	keymap('n', '<F5>', require('dap').continue, { desc = 'debug: continue program' })
+	keymap('n', '<F17>', require('dap').terminate, { desc = 'debug: stop program' }) -- Shift + F5
+	keymap('n', '<F29>', require('dap').restart_frame, { desc = 'debug: restart program' }) -- Control + F5
+
+	keymap('n', '<F6>', require('dap').pause, { desc = 'debug: pause program' })
+	keymap('n', '<F9>', require('dap').toggle_breakpoint, { desc = 'debug: toggle breakpoint' })
+	keymap('n', '<F21>', function()
+		require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
+		end, { desc = 'debug: Conditional breakpoint' }) -- Shift + F9
+	keymap('n', '<F10>', require('dap').step_over, { desc = 'debug: step over' })
+	keymap('n', '<F11>', require('dap').step_into, { desc = 'debug: step into' })
+	keymap('n', '<F23>', require('dap').step_out, { desc = 'debug: step out' }) -- Shift + F11
 end
 
 function M.oil()
