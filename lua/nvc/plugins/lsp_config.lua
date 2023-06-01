@@ -84,7 +84,6 @@ return {
 		end,
 	},
 	{
-		--TODO configure it
 		-- LSP UI
 		'haru02w/lspsaga.nvim',
 		event = 'LspAttach',

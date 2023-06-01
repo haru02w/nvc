@@ -21,8 +21,8 @@ keymap('n', '<leader>\\', vim.cmd.sp, { desc = 'Split screen' })
 keymap('n', '<leader>|', vim.cmd.vs, { desc = 'Split screen vertically' })
 
 -- Move lines around
-keymap('v', 'J', ':m \'>+1<CR>gv=gv', { desc = 'move selected lines down' })
-keymap('v', 'K', ':m \'<-2<CR>gv=gv', { desc = 'move selected lines up' })
+keymap('v', '<C-j>', ':m \'>+1<CR>gv=gv', { desc = 'move selected lines down' })
+keymap('v', '<C-k>', ':m \'<-2<CR>gv=gv', { desc = 'move selected lines up' })
 
 -- Append next line without moving cursor
 keymap('n', '<leader>j', 'mzJ`z', { desc = 'append next line' })
